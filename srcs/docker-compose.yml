@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./requirements/nginx
+    restart: on-failure
+    networks:
+      - docker-network
+    ports:
+      - 443:443
+
+  wordpress:
+    build: ./requirements/wordpress
+    restart: on-failure
+    networks:
+      - docker-network
+
+  mariadb:
+    build: ./requirements/mariadb
+    restart: on-failure
+    networks:
+      - docker-network
+
+networks:
+  docker-network:
+    driver: bridge
