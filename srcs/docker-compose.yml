@@ -4,6 +4,10 @@ services:
   nginx:
     build: ./requirements/nginx
     restart: on-failure
+    volumes:
+      - wordpress:/var/www/html
+    env_file:
+      - .env
     networks:
       - docker-network
     ports:
@@ -12,14 +16,35 @@ services:
   wordpress:
     build: ./requirements/wordpress
     restart: on-failure
+    volumes:
+      - wordpress:/var/www/html
     networks:
       - docker-network
 
   mariadb:
     build: ./requirements/mariadb
     restart: on-failure
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file:
+      - .env
     networks:
       - docker-network
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/login/data/wordpress
+      o: bind
+
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/login/data/mariadb
+      o: bind
 
 networks:
   docker-network:
