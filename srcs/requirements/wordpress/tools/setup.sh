@@ -1,1 +1,2 @@
-apt-get update && apt-get install -y wordpress
+apt-get update && apt-get upgrade -y && \
+apt-get install -y php-fpm php-mysql

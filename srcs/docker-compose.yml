@@ -5,14 +5,13 @@ services:
     build: ./requirements/nginx
     restart: on-failure
     volumes:
-      - wordpress:/var/www/html
+      - wordpress:/var/www/rburgsta.42.fr
     env_file:
       - .env
     networks:
       - docker-network
     ports:
       - 443:443
-
   wordpress:
     build: ./requirements/wordpress
     restart: on-failure
@@ -20,7 +19,6 @@ services:
       - wordpress:/var/www/html
     networks:
       - docker-network
-
   mariadb:
     build: ./requirements/mariadb
     restart: on-failure
@@ -36,14 +34,14 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/login/data/wordpress
+      device: /home/rburgsta/data/wordpress
       o: bind
 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /home/login/data/mariadb
+      device: /home/rburgsta/data/mariadb
       o: bind
 
 networks:
