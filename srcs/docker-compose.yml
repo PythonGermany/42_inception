@@ -12,6 +12,7 @@ services:
       - docker-network
     ports:
       - 443:443
+
   wordpress:
     build: ./requirements/wordpress
     restart: on-failure
@@ -19,6 +20,7 @@ services:
       - wordpress:/var/www/html
     networks:
       - docker-network
+
   mariadb:
     build: ./requirements/mariadb
     restart: on-failure
