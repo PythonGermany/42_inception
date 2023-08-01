@@ -1,6 +1,6 @@
 FROM debian:oldstable
 
-COPY tools/setup.sh .
-RUN sh setup.sh
+COPY conf/create_database.sql create_database.sql
+RUN apt-get update && apt-get upgrade -y && sh mariadb.sh
 
 CMD [ "sleep", "infinity"]

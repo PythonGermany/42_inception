@@ -1,5 +1,6 @@
 FROM debian:oldstable
 
-COPY tools/setup.sh .
-RUN sh setup.sh
+COPY conf/wp-config.php .
+RUN apt-get update && apt-get upgrade -y && sh wordpress.sh
 
+CMD ["sleep", "infinity"]

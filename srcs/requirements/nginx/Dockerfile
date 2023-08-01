@@ -1,11 +1,8 @@
 FROM debian:oldstable
 
-COPY tools/setup.sh .
-RUN sh setup.sh
+RUN apt-get update && apt-get upgrade -y && sh nginx.sh
 
-COPY conf/rburgsta.42.fr.conf /etc/nginx/sites-available
-COPY conf/ssl.crt /etc/nginx/ssl
-COPY conf/ssl.key /etc/nginx/ssl
+COPY conf/default /etc/nginx/sites-available
 
 EXPOSE 443
 
