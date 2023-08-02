@@ -1,8 +1,8 @@
 FROM debian:oldstable
 
+COPY conf/. .
+COPY tools/. .
 RUN apt-get update && apt-get upgrade -y && sh nginx.sh
-
-COPY conf/default /etc/nginx/sites-available
 
 EXPOSE 443
 
