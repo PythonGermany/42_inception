@@ -4,4 +4,4 @@ COPY conf/. .
 COPY tools/. .
 RUN apt-get update && apt-get upgrade -y && sh mariadb.sh
 
-CMD [ "sleep", "infinity"]
+CMD [ "/usr/sbin/mariadbd"]

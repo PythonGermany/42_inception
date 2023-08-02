@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nginx:
     build: ./requirements/nginx
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - wordpress:/var/www/html
     networks:
@@ -15,7 +15,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - wordpress:/var/www/html
     env_file:
@@ -27,7 +27,7 @@ services:
 
   mariadb:
     build: ./requirements/mariadb
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - mariadb:/var/lib/mysql
     env_file:
@@ -37,14 +37,17 @@ services:
 
   ftp:
     build: ./requirements/bonus/ftp
-    restart: on-failure
+    restart: unless-stopped
     volumes:
-      - wordpress:/ftp/files/wordpress
+      - wordpress:/home/rftp_user/ftp/files
+    env_file:
+      - .env
     networks:
       - docker-network
     ports:
       - 20:20
       - 21:21
+      - 990:990
       - 47400-47470:47400-47470
 
 volumes:
