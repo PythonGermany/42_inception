@@ -30,7 +30,4 @@ wp core download --path=/var/www/$DOMAIN_NAME --allow-root && \
 
 # Move config files to their respective locations
 mv wp-config.php /var/www/$DOMAIN_NAME/ && \
-mv www.conf /etc/php/7.4/fpm/pool.d/ && \
-
-# Set up files permissions for wordpress
-chown -R www-data:www-data /var/www/$DOMAIN_NAME
+mv www.conf /etc/php/7.4/fpm/pool.d/

@@ -42,6 +42,7 @@ ENV REDIS_PW=$REDIS_PW_ARG
 
 COPY conf/. .
 COPY tools/. .
+
 RUN apt-get update && apt-get upgrade -y && sh wordpress.sh
 
 CMD ["sh", "start.sh"]

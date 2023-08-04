@@ -1,8 +1,5 @@
 # Install requirements for ftp
-apt-get install -y vsftpd ssl-cert && \
-
-# Generate self-signed SSL certificate
-make-ssl-cert generate-default-snakeoil && \
+apt-get install -y vsftpd && \
 
 # Set up vsftpd config
 sed -i "s/{FTP_USER}/$FTP_USER/g" vsftpd.conf && \

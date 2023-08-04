@@ -78,7 +78,7 @@ services:
         - FTP_PW_ARG=${FTP_PW}
     restart: unless-stopped
     volumes:
-      - wordpress:/home/rftp_user/ftp/files
+      - wordpress:/home/${FTP_USER}/ftp/files
     networks:
       - docker-network
     ports:

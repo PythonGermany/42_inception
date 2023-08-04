@@ -10,6 +10,7 @@ ENV REDIS_PORT=$REDIS_PORT_ARG
 
 COPY conf/. .
 COPY tools/. .
+
 RUN apt-get update && apt-get upgrade -y && sh redis.sh
 
 CMD [ "sleep", "infinity"]
