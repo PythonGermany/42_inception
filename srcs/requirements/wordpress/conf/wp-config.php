@@ -20,19 +20,19 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpress' );
+define( 'DB_NAME', '{DB_NAME}' );
 
 /** Database username */
-define( 'DB_USER', 'wordpress_user' );
+define( 'DB_USER', '{DB_USER}' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'wordpress_password' );
+define( 'DB_PASSWORD', '{DB_PASSWORD}' );
 
 /** Database hostname */
-define( 'DB_HOST', 'srcs-mariadb-1' );
+define( 'DB_HOST', '{DB_HOST}' );
 
 /** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define( 'DB_CHARSET', 'utf8mb4' );
 
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
@@ -48,7 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-{{AUTH_KEY_AND_SALTS}}
+# INSERT SECRET KEYS HERE
+
+define('WP_CACHE_KEY_SALT', 'rburgsta.42.fr');
+define('WP_CACHE', true);
+
+define('WP_REDIS_HOST', '{REDIS_HOST}');
+define('WP_REDIS_DISABLE_BANNERS', true);
+define('WP_REDIS_PASSWORD', '{REDIS_PASSWORD}');
 
 /**#@-*/
 

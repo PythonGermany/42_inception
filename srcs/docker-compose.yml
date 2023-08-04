@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   nginx:
+    container_name: nginx
     build: ./requirements/nginx
     restart: unless-stopped
     volumes:
@@ -10,38 +11,52 @@ services:
       - docker-network
     ports:
       - 443:443
-    depends_on:
-      - wordpress
 
   wordpress:
-    build: ./requirements/wordpress
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      args:
+        - MYSQL_DB_ARG=${MYSQL_DB}
+        - MYSQL_USER_ARG=${MYSQL_USER}
+        - MYSQL_PW_ARG=${MYSQL_PW}
+        - MYSQL_HOST_ARG=${MYSQL_HOST}
+        - REDIS_HOST_ARG=${REDIS_HOST}
+        - REDIS_PW_ARG=${REDIS_PW}
     restart: unless-stopped
     volumes:
       - wordpress:/var/www/html
-    env_file:
-      - .env
     networks:
       - docker-network
     depends_on:
       - mariadb
+      - redis
 
   mariadb:
-    build: ./requirements/mariadb
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      args:
+        - MYSQL_ROOT_PW_ARG=${MYSQL_ROOT_PW}
+        - MYSQL_DB_ARG=${MYSQL_DB}
+        - MYSQL_USER_ARG=${MYSQL_USER}
+        - MYSQL_PW_ARG=${MYSQL_PW}
     restart: unless-stopped
     volumes:
       - mariadb:/var/lib/mysql
-    env_file:
-      - .env
     networks:
       - docker-network
 
   ftp:
-    build: ./requirements/bonus/ftp
+    container_name: ftp
+    build:
+      context: ./requirements/bonus/ftp
+      args:
+        - FTP_USER_ARG=${FTP_USER}
+        - FTP_PW_ARG=${FTP_PW}
     restart: unless-stopped
     volumes:
       - wordpress:/home/rftp_user/ftp/files
-    env_file:
-      - .env
     networks:
       - docker-network
     ports:
@@ -49,21 +64,25 @@ services:
       - 21:21
       - 990:990
       - 47400-47470:47400-47470
+    depends_on:
+      - wordpress
+
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+      args:
+        - REDIS_PW_ARG=${REDIS_PW}
+    restart: unless-stopped
+    networks:
+      - docker-network
 
 volumes:
   wordpress:
     driver: local
-    driver_opts:
-      type: none
-      device: /home/rburgsta/data/wordpress
-      o: bind
 
   mariadb:
     driver: local
-    driver_opts:
-      type: none
-      device: /home/rburgsta/data/mariadb
-      o: bind
 
 networks:
   docker-network:

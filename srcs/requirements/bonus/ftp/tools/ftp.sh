@@ -1,22 +1,27 @@
+# Install requirements for ftp
 apt-get install -y vsftpd ssl-cert && \
 
-mv vsftpd.conf /etc/vsftpd.conf && \
+# Move config files to their respective locations
+mv vsftpd.conf /etc/ && \
 
-mkdir -p /var/run/vsftpd/empty && \
-mkdir -p /home/rftp_user/ftp/files && \
-
+# Generate self-signed SSL certificate
 make-ssl-cert generate-default-snakeoil && \
 
+mkdir -p /var/run/vsftpd/empty && \
+mkdir -p /home/$FTP_USER/ftp/files && \
+
+# Set up ftp nologin shell
 echo 'echo "This account is limited to FTP access only."' >> /bin/ftponly && \
 echo "/bin/ftponly" >> /etc/shells
 chmod a+x /bin/ftponly && \
 
-useradd rftp_user -s /bin/ftponly && \
-echo "rftp_user:password" | chpasswd && \
-echo "rftp_user" >> /etc/vsftpd.userlist && \
+# Set up ftp user
+useradd $FTP_USER -s /bin/ftponly && \
+echo "$FTP_USER:$FTP_PW" | chpasswd && \
+echo "$FTP_USER" >> /etc/vsftpd.userlist && \
 
-chown nobody:nogroup /home/rftp_user/ftp && \
-chown -R rftp_user:rftp_user /home/rftp_user/ftp/files && \
+chmod a-w /home/$FTP_USER/ftp && \
+chmod a-w /var/run/vsftpd/empty && \
 
-chmod a-w /home/rftp_user/ftp && \
-chmod a-w /var/run/vsftpd/empty
+chown nobody:nogroup /home/$FTP_USER/ftp && \
+chown -R $FTP_USER:$FTP_USER /home/$FTP_USER/ftp/files
