@@ -1,7 +1,15 @@
+CONTAINER ?= none
+
 all: up
 
 up: create_volume_folders
 	docker compose -f srcs/docker-compose.yml up -d
+
+down:
+	docker compose -f srcs/docker-compose.yml down
+
+update:
+	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(CONTAINER)
 
 create_volume_folders:
 	mkdir -p /home/rburgsta/data/wordpress
@@ -10,9 +18,6 @@ create_volume_folders:
 delete_volume_folders:
 	rm -rf /home/rburgsta/data/wordpress
 	rm -rf /home/rburgsta/data/mariadb
-
-down:
-	docker compose -f srcs/docker-compose.yml down
 
 clean: down 
 	docker image prune -a -f
