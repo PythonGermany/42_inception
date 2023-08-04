@@ -50,10 +50,11 @@ define( 'DB_COLLATE', '' );
  */
 # INSERT SECRET KEYS HERE
 
-define('WP_CACHE_KEY_SALT', 'rburgsta.42.fr');
+define('WP_CACHE_KEY_SALT', '{WP_CACHE_KEY_SALT}');
 define('WP_CACHE', true);
 
 define('WP_REDIS_HOST', '{REDIS_HOST}');
+define('WP_REDIS_PORT', '{REDIS_PORT}');
 define('WP_REDIS_DISABLE_BANNERS', true);
 define('WP_REDIS_PASSWORD', '{REDIS_PASSWORD}');
 

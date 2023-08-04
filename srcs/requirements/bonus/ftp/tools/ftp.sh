@@ -1,11 +1,14 @@
 # Install requirements for ftp
 apt-get install -y vsftpd ssl-cert && \
 
-# Move config files to their respective locations
-mv vsftpd.conf /etc/ && \
-
 # Generate self-signed SSL certificate
 make-ssl-cert generate-default-snakeoil && \
+
+# Set up vsftpd config
+sed -i "s/{FTP_USER}/$FTP_USER/g" vsftpd.conf && \
+
+# Move config files to their respective locations
+mv vsftpd.conf /etc/ && \
 
 mkdir -p /var/run/vsftpd/empty && \
 mkdir -p /home/$FTP_USER/ftp/files && \
