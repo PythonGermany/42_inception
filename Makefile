@@ -1,35 +1,43 @@
-CONTAINER ?= none
+ARG ?= none
 
 all: up
 
-up: create_volume_folders
-	@sh srcs/add_hosts.sh
+up: volume_create
 	docker compose -f srcs/docker-compose.yml up -d
 
 down:
 	docker compose -f srcs/docker-compose.yml down
 
 update:
-	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(CONTAINER)
+	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(ARG)
 
-create_ssl:
-	(cd srcs && sh setup_ssl.sh)
+setup: install_docker add_domains ssl_setup
 
-delete_ssl:
-	(cd srcs && sh delete_ssl.sh)
+add_domains:
+	@sh srcs/tools/add_domain.sh rburgsta.42.fr
+	@sh srcs/tools/add_domain.sh rburgsta.example
 
-create_volume_folders:
+ssl_setup:
+	(cd srcs/tools && sh ssl_setup.sh)
+
+ssl_delete:
+	(cd srcs/tools && sh ssl_setup.sh)
+
+volume_create:
 	mkdir -p /home/rburgsta/data/wordpress
 	mkdir -p /home/rburgsta/data/mariadb
 
-delete_volume_folders:
+volume_delete:
 	rm -rf /home/rburgsta/data/wordpress
 	rm -rf /home/rburgsta/data/mariadb
+
+install_docker:
+	managevm/install_docker.sh $(ARG)
 
 clean: down 
 	docker image prune -a -f
 
-fclean: clean delete_volume_folders
+fclean: clean volume_delete
 	docker system prune
 
 re: fclean all
