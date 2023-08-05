@@ -34,12 +34,4 @@ mv cacert.pem requirements/bonus/ftp/ssl/
 mv server-cert.pem requirements/bonus/ftp/ssl/
 mv server-key.pem requirements/bonus/ftp/ssl/
 
-# Create SSL credentials for redis server
-sh create_ssl.sh server
-
-# Move redis SSL credentials to the appropriate locations
-#mv cacert.pem requirements/bonus/redis/ssl/
-#mv server-cert.pem requirements/bonus/redis/ssl/
-#mv server-key.pem requirements/bonus/redis/ssl/
-
 rm -f ca-key.pem
