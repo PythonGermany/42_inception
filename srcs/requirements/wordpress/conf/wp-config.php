@@ -59,6 +59,8 @@ define('WP_REDIS_PORT', '{REDIS_PORT}');
 define('WP_REDIS_DISABLE_BANNERS', true);
 define('WP_REDIS_PASSWORD', '{REDIS_PASSWORD}');
 
+define('FORCE_SSL_ADMIN', true);
+
 /**#@-*/
 
 /**
