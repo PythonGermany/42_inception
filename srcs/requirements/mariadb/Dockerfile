@@ -12,7 +12,7 @@ ENV MYSQL_USER_PW=$MYSQL_USER_PW_ARG
 
 COPY conf/. .
 COPY tools/. .
-COPY ssl/. .
+COPY .ssl/. .
 
 RUN apt-get update && apt-get upgrade -y && sh mariadb.sh
 

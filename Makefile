@@ -11,17 +11,17 @@ down:
 update:
 	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(ARG)
 
-setup: install_docker add_domains ssl_setup
+setup: install_docker add_domains ssl_create
 
 add_domains:
 	@sh srcs/tools/add_domain.sh rburgsta.42.fr
 	@sh srcs/tools/add_domain.sh rburgsta.example
 
-ssl_setup:
-	(cd srcs/tools && sh ssl_setup.sh)
+ssl_create:
+	(cd srcs/tools && sh ssl_create.sh)
 
 ssl_delete:
-	(cd srcs/tools && sh ssl_setup.sh)
+	(cd srcs/tools && sh ssl_delete.sh)
 
 volume_create:
 	mkdir -p /home/rburgsta/data/wordpress

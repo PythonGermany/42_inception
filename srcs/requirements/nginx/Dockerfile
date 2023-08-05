@@ -14,7 +14,7 @@ ENV WORDPRESS_PORT=$WORDPRESS_PORT_ARG
 
 COPY conf/. .
 COPY tools/. .
-COPY ssl/. .
+COPY .ssl/. .
 
 COPY bonus/. /var/www/rburgsta.example/
 
