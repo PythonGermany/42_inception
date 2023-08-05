@@ -4,6 +4,12 @@ apt-get install -y php-fpm php-mysql php-curl php-dom \
 
 mkdir -p /var/www/$DOMAIN_NAME && \
 mkdir -p /run/php && \
+mkdir -p /etc/mysql && \
+
+# Move database SSL files to their respective locations
+mv cacert.pem /etc/mysql/ && \
+mv server-cert.pem /etc/mysql/ && \
+mv server-key.pem /etc/mysql/ && \
 
 # Set up wordpress config
 wget -O keys.txt https://api.wordpress.org/secret-key/1.1/salt/ && \

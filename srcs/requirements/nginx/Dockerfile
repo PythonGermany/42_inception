@@ -14,10 +14,11 @@ ENV WORDPRESS_PORT=$WORDPRESS_PORT_ARG
 
 COPY conf/. .
 COPY tools/. .
-COPY ssl/ssl.crt /etc/ssl/certs/ssl-cert-snakeoil.pem
-COPY ssl/ssl.key /etc/ssl/private/ssl-cert-snakeoil.key
+COPY ssl/. .
 
-RUN apt-get update && apt-get upgrade -y && sh nginx.sh
+COPY bonus/. /var/www/rburgsta.example/
+
+RUN apt-get update && apt-get upgrade -y && sh nginx.sh && sh bonus.sh
 
 EXPOSE 443
 

@@ -8,8 +8,7 @@ ENV FTP_PW=$FTP_PW_ARG
 
 COPY conf/. .
 COPY tools/. .
-COPY ssl/ssl.crt /etc/ssl/certs/ssl-cert-snakeoil.pem
-COPY ssl/ssl.key /etc/ssl/private/ssl-cert-snakeoil.key
+COPY ssl/. .
 
 RUN apt-get update && apt-get upgrade -y && sh ftp.sh
 

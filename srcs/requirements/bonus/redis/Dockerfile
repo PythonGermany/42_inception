@@ -13,4 +13,4 @@ COPY tools/. .
 
 RUN apt-get update && apt-get upgrade -y && sh redis.sh
 
-CMD [ "sleep", "infinity"]
+CMD [ "/usr/bin/supervisord"]

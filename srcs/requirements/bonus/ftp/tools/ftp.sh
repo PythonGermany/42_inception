@@ -7,6 +7,10 @@ sed -i "s/{FTP_USER}/$FTP_USER/g" vsftpd.conf && \
 # Move config files to their respective locations
 mv vsftpd.conf /etc/ && \
 
+# Move SSL files to their respective locations
+mv server-cert.pem /etc/ssl/certs/ && \
+mv server-key.pem /etc/ssl/private/ && \
+
 mkdir -p /var/run/vsftpd/empty && \
 mkdir -p /home/$FTP_USER/ftp/files && \
 

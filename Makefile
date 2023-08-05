@@ -3,6 +3,7 @@ CONTAINER ?= none
 all: up
 
 up: create_volume_folders
+	@sh srcs/add_hosts.sh
 	docker compose -f srcs/docker-compose.yml up -d
 
 down:
@@ -10,6 +11,12 @@ down:
 
 update:
 	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(CONTAINER)
+
+create_ssl:
+	sh srcs/create_ssl.sh
+
+remove_ssl:
+ 
 
 create_volume_folders:
 	mkdir -p /home/rburgsta/data/wordpress

@@ -17,8 +17,6 @@ services:
       - docker-network
     ports:
       - 443:443
-    depends_on:
-      - wordpress
 
   wordpress:
     container_name: ${WORDPRESS_HOST}
@@ -48,9 +46,6 @@ services:
       - wordpress:/var/www/${DOMAIN_NAME}
     networks:
       - docker-network
-    depends_on:
-      - mariadb
-      - redis
 
   mariadb:
     container_name: ${MYSQL_HOST}
@@ -86,8 +81,6 @@ services:
       - 21:21
       - 990:990
       - 47400-47470:47400-47470
-    depends_on:
-      - wordpress
 
   redis:
     container_name: ${REDIS_HOST}
