@@ -18,7 +18,7 @@ sed -i "s/{DB_NAME}/$MYSQL_DATABASE/g" wp-config.php && \
 sed -i "s/{DB_USER}/$MYSQL_USER/g" wp-config.php && \
 sed -i "s/{DB_PASSWORD}/$MYSQL_USER_PW/g" wp-config.php && \
 sed -i "s/{DB_HOST}/$MYSQL_HOST/g" wp-config.php && \
-sed -i "s/{WP_CACHE_KEY_SALT}/$DOMAIN_NAME/g" wp-config.php && \
+sed -i "s/{WP_REDIS_PREFIX}/$DOMAIN_NAME/g" wp-config.php && \
 sed -i "s/{WORDPRESS_HOST}/$WORDPRESS_HOST/g" www.conf && \
 sed -i "s/{WORDPRESS_PORT}/$WORDPRESS_PORT/g" www.conf && \
 sed -i "s/{REDIS_HOST}/$REDIS_HOST/g" wp-config.php && \

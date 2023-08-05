@@ -50,9 +50,10 @@ define( 'DB_COLLATE', '' );
  */
 # INSERT SECRET KEYS HERE
 
-define('WP_CACHE_KEY_SALT', '{WP_CACHE_KEY_SALT}');
+define('WP_REDIS_PREFIX', '{WP_REDIS_PREFIX}');
 define('WP_CACHE', true);
 
+define('WP_REDIS_CLIENT', 'phpredis');
 define('WP_REDIS_HOST', '{REDIS_HOST}');
 define('WP_REDIS_PORT', '{REDIS_PORT}');
 define('WP_REDIS_DISABLE_BANNERS', true);

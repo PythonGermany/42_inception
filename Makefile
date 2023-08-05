@@ -13,10 +13,10 @@ update:
 	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(CONTAINER)
 
 create_ssl:
-	sh srcs/create_ssl.sh
+	(cd srcs && sh setup_ssl.sh)
 
-remove_ssl:
- 
+delete_ssl:
+	(cd srcs && sh delete_ssl.sh)
 
 create_volume_folders:
 	mkdir -p /home/rburgsta/data/wordpress

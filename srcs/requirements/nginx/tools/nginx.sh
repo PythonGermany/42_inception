@@ -1,6 +1,10 @@
 # Install requirements for nginx
 apt-get install -y nginx && \
 
+# Create required directories
+mkdir -p /etc/ssl/certs && \
+mkdir -p /etc/ssl/private && \
+
 # Move SSL credentials to the appropriate locations
 mv server-cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem && \
 mv server-key.pem /etc/ssl/private/ssl-cert-snakeoil.key && \
