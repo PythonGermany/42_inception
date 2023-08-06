@@ -12,7 +12,8 @@ COPY .ssl/. .
 
 RUN apt-get update && apt-get upgrade -y && sh ftp.sh
 
-EXPOSE 20 21 990
+EXPOSE 20
+EXPOSE 21
 EXPOSE 47400-47470
 
 CMD [ "/usr/sbin/vsftpd"]
