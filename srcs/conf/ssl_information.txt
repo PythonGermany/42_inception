@@ -1,6 +1,6 @@
 /C=DE
 /ST=Baden-Wuerttemberg
 /L=Heilbronn
-/O=Unreal_42HN
-/OU=42
-/CN=inception
+/O=SelfSigned_42HN
+/OU=rburgsta
+/CN=42
