@@ -30,8 +30,8 @@ volume_create:
 ssl_delete:
 	(cd srcs/tools && sh ssl_delete.sh)
 volume_delete:
-	rm -rf /home/rburgsta/data/wordpress
-	rm -rf /home/rburgsta/data/mariadb
+	sudo rm -rf /home/rburgsta/data/wordpress
+	sudo rm -rf /home/rburgsta/data/mariadb
 
 # Utils
 files_to_unix:
@@ -41,6 +41,7 @@ files_to_unix:
 # Clean and rebuild
 clean: down 
 	sudo docker image prune -a -f
-fclean: clean volume_delete
+fclean: clean ssl_delete volume_delete
 	sudo docker system prune
-re: fclean all
+	rm -f srcs/.env
+re: fclean ssl_create all

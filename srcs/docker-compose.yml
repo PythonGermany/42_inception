@@ -32,6 +32,8 @@ services:
         - WORDPRESS_ADMIN_ARG=${WORDPRESS_ADMIN}
         - WORDPRESS_ADMIN_PW_ARG=${WORDPRESS_ADMIN_PW}
         - WORDPRESS_ADMIN_EMAIL_ARG=${WORDPRESS_ADMIN_EMAIL}
+        # Adminer file name
+        - ADMINER_FILE_NAME_ARG=${ADMINER_FILE_NAME}
         # Database connection info
         - MYSQL_DATABASE_ARG=${MYSQL_DATABASE}
         - MYSQL_USER_ARG=${MYSQL_USER}

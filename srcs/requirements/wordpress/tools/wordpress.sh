@@ -35,7 +35,7 @@ mv wp-cli.phar /usr/local/bin/wp && \
 wp core download --path=/var/www/$DOMAIN_NAME --allow-root && \
 
 # Download adminer file
-wget -O /var/www/$DOMAIN_NAME/adminer.php https://www.adminer.org/latest.php && \
+wget -O /var/www/$DOMAIN_NAME/$ADMINER_FILE_NAME https://www.adminer.org/latest.php && \
 
 # Move config files to their respective locations
 mv wp-config.php /var/www/$DOMAIN_NAME/ && \
