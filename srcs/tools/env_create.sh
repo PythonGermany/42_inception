@@ -1,5 +1,5 @@
-# Copy template file
-cp ../templates/.env-sample ../.env
+# Copy template .env file
+cp ../conf/.env-sample ../.env
 
 # Insert default values into .env file
 sed -i "s/{LOGIN}/$1/g" ../.env

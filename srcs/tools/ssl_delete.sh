@@ -1,5 +1,3 @@
-# Delete SSL directories
-rm -rf ../requirements/nginx/.ssl
-rm -rf ../requirements/mariadb/.ssl
-rm -rf ../requirements/wordpress/.ssl
-rm -rf ../requirements/bonus/ftp/.ssl
+# Delete SSL directories and files
+find ../ -type d -name ".ssl" -exec rm -rf {} +
+find ../ -type f -name "*.pem" -exec rm -rf {} +

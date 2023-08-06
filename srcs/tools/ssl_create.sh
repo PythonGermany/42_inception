@@ -1,5 +1,5 @@
 openssl genpkey -algorithm RSA -out ca-key.pem
-openssl req -new -x509 -key ca-key.pem -out cacert.pem
+openssl req -new -x509 -key ca-key.pem -out cacert.pem -subj $(cat ../conf/ssl_information.txt | tr -d "\n")
 
 # Create required directories
 mkdir -p ../requirements/nginx/.ssl
@@ -35,4 +35,3 @@ mv server-cert.pem ../requirements/bonus/ftp/.ssl/
 mv server-key.pem ../requirements/bonus/ftp/.ssl/
 
 rm -f ca-key.pem
-rm -f cacert.srl
