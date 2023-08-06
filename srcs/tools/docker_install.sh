@@ -1,3 +1,7 @@
+if [ "$#" -eq 0 ]; then
+  echo "docker_install.sh: missing argument to specify OS"
+  exit 1
+fi
 apt-get update
 apt-get install ca-certificates curl gnupg
 install -m 0755 -d /etc/apt/keyrings
