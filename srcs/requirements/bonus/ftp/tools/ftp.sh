@@ -3,6 +3,8 @@ apt-get install -y vsftpd && \
 
 # Set up vsftpd config
 sed -i "s/{FTP_USER}/$FTP_USER/g" vsftpd.conf && \
+sed -i "s/{FTP_PASV_MIN_PORT}/$FTP_PASV_MIN_PORT/g" vsftpd.conf && \
+sed -i "s/{FTP_PASV_MAX_PORT}/$FTP_PASV_MAX_PORT/g" vsftpd.conf && \
 
 # Move config files to their respective locations
 mv vsftpd.conf /etc/ && \

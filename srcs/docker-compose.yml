@@ -69,6 +69,8 @@ services:
       context: ./requirements/bonus/ftp
       args:
         # FTP config info
+        - FTP_PASV_MIN_PORT_ARG=${FTP_PASV_MIN_PORT}
+        - FTP_PASV_MAX_PORT_ARG=${FTP_PASV_MAX_PORT}
         - FTP_USER_ARG=${FTP_USER}
         - FTP_PW_ARG=${FTP_PW}
     restart: unless-stopped
