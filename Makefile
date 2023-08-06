@@ -1,21 +1,25 @@
-ARG ?= none
+ARG = none
+USER ?=
 
 all: up
 
 up: volume_create
-	docker compose -f srcs/docker-compose.yml up -d
+	sudo docker compose -f srcs/docker-compose.yml up -d
 
 down:
-	docker compose -f srcs/docker-compose.yml down
+	sudo docker compose -f srcs/docker-compose.yml down
 
 update:
-	docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(ARG)
+	sudo docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(ARG)
 
-setup: install_docker add_domains ssl_create
+setup: install_docker env_create ssl_create add_domains
 
 add_domains:
-	@sh srcs/tools/add_domain.sh rburgsta.42.fr
-	@sh srcs/tools/add_domain.sh rburgsta.example
+	@sudo sh srcs/tools/add_domain.sh rburgsta.42.fr
+	@sudo sh srcs/tools/add_domain.sh rburgsta.example
+
+env_create:
+	(cd srcs/tools && sh env_create.sh $(USER))
 
 ssl_create:
 	(cd srcs/tools && sh ssl_create.sh)
@@ -31,13 +35,17 @@ volume_delete:
 	rm -rf /home/rburgsta/data/wordpress
 	rm -rf /home/rburgsta/data/mariadb
 
-install_docker:
-	managevm/install_docker.sh $(ARG)
+docker_install:
+	sudo sh srcs/tools/docker_install.sh $(ARG)
+
+files_to_unix:
+	sudo apt-get install dos2unix
+	find . -type f -exec dos2unix {} +
 
 clean: down 
-	docker image prune -a -f
+	sudo docker image prune -a -f
 
 fclean: clean volume_delete
-	docker system prune
+	sudo docker system prune
 
 re: fclean all
