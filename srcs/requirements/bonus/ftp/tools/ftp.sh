@@ -22,12 +22,11 @@ echo "/bin/ftponly" >> /etc/shells
 chmod a+x /bin/ftponly && \
 
 # Set up ftp user
-useradd $FTP_USER -s /bin/ftponly && \
+useradd -g www-data $FTP_USER -s /bin/ftponly && \
 echo "$FTP_USER:$FTP_PW" | chpasswd && \
 echo "$FTP_USER" >> /etc/vsftpd.userlist && \
 
 chmod a-w /home/$FTP_USER/ftp && \
 chmod a-w /var/run/vsftpd/empty && \
 
-chown nobody:nogroup /home/$FTP_USER/ftp && \
-chown -R $FTP_USER:$FTP_USER /home/$FTP_USER/ftp/files
+chown nobody:nogroup /home/$FTP_USER/ftp

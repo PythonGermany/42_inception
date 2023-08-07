@@ -10,8 +10,8 @@ if ! wp core is-installed --path=/var/www/$DOMAIN_NAME --allow-root; then
   wp redis enable --path=/var/www/$DOMAIN_NAME --allow-root
   # Set up files permissions for wordpress
   chown -R www-data:www-data /var/www/$DOMAIN_NAME
-  find /var/www/$DOMAIN_NAME -type d -exec chmod 755 {} \;
-  find /var/www/$DOMAIN_NAME -type f -exec chmod 644 {} \;
+  find /var/www/$DOMAIN_NAME -type d -exec chmod 775 {} \;
+  find /var/www/$DOMAIN_NAME -type f -exec chmod 664 {} \;
 fi
 
 echo "Wordpress started!"
