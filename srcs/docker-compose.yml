@@ -78,8 +78,6 @@ services:
     restart: unless-stopped
     volumes:
       - wordpress:/home/${FTP_USER}/ftp/files
-    networks:
-      - docker-network
     ports:
       - 20:20
       - 21:21
