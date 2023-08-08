@@ -1,5 +1,5 @@
 if [ "$#" -eq 0 ]; then
-  echo "docker_install.sh: missing argument to specify OS"
+  echo "ERROR: docker_install.sh: missing argument to specify OS"
   exit 1
 fi
 # Update the apt package index and install packages to allow apt to use a repository over HTTPS

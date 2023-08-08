@@ -15,7 +15,7 @@ RESET = \033[0m
 all: up
 
 # Docker
-up:
+up: volume_create
 	sudo docker compose -f srcs/docker-compose.yml up -d
 down:
 	sudo docker compose -f srcs/docker-compose.yml down
@@ -24,7 +24,7 @@ update:
 
 # Setup
 master_setup: docker_install setup
-setup: env_create ssl_create domains_add volume_create
+setup: env_create ssl_create domains_add
 docker_install:
 	sudo sh srcs/tools/docker_install.sh $(ARG)
 env_create:
@@ -59,12 +59,12 @@ help:
 	@echo "Targets:$(RESET)"
 	@echo "  all (default)  - Start containers"
 	@echo "$(RED)--------------------- Docker ---------------------$(RESET)"
-	@echo "  up             - Start containers"
+	@echo "  up             - Start containers run 'make create volumes'"
 	@echo "  down           - Stop containers"
 	@echo "  update         - Rebuild container"
 	@echo "$(RED)--------------------- Setup ---------------------"
 	@echo "$(YELLOW)  master_setup	  - Run 'make install_docker setup'"
-	@echo "$(YELLOW)  setup          - Run 'make env_create ssl_create domains_add volume_create'"
+	@echo "$(YELLOW)  setup          - Run 'make env_create ssl_create domains_add'"
 	@echo "$(WHITE)  docker_install - Install docker using ARG=\"...\" as OS"
 	@echo "$(GREEN)  env_create     - Create .env file using random passwords using ENV var USER=\"...\ as name"
 	@echo "$(BLUE)  ssl_create     - Create SSL certificates"
