@@ -9,8 +9,8 @@ if ! wp core is-installed --path=/var/www/$DOMAIN_NAME --allow-root; then
     --activate --path=/var/www/$DOMAIN_NAME --allow-root
   wp redis enable --path=/var/www/$DOMAIN_NAME --allow-root
   # Install additional util plugins
-  if [ "$WORDPRESS_UTILS" != "" ]; then
-    utils=$(echo $WORDPRESS_UTILS | tr "," "\n")
+  if [ "$WORDPRESS_PLUGINS" != "" ]; then
+    utils=$(echo $WORDPRESS_PLUGINS | tr "," "\n")
     for util in $utils; do
       wp plugin install $util --activate --path=/var/www/$DOMAIN_NAME --allow-root
     done
