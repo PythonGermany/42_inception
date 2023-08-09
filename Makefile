@@ -35,8 +35,8 @@ domains_add:
 	@sudo sh srcs/tools/domain_add.sh rburgsta.42.fr
 	@sudo sh srcs/tools/domain_add.sh rburgsta.example
 volume_create:
-	sudo mkdir -p /home/rburgsta/data/wordpress
-	sudo mkdir -p /home/rburgsta/data/mariadb
+	sudo mkdir -p /home/$(USER)/data/wordpress
+	sudo mkdir -p /home/$(USER)/data/mariadb
 
 # Delete
 env_delete:
@@ -47,8 +47,8 @@ domains_remove:
 	sudo sed -i '/rburgsta.42.fr/d' /etc/hosts
 	sudo sed -i '/rburgsta.example/d' /etc/hosts
 volume_delete:
-	sudo rm -rf /home/rburgsta/data/wordpress
-	sudo rm -rf /home/rburgsta/data/mariadb
+	sudo rm -rf /home/$(USER)/data/wordpress
+	sudo rm -rf /home/$(USER)/data/mariadb
 
 # Utils
 files_to_unix:
