@@ -1,3 +1,5 @@
+read -p 'Do you want to create a certificate using certbot? (y/n): ' USE_CERTBOT
+
 openssl genpkey -algorithm RSA -out ca-key.pem
 openssl req -new -x509 -key ca-key.pem -out cacert.pem -subj $(cat ../conf/ssl_information.txt | tr -d "\n")
 
@@ -6,12 +8,13 @@ mkdir -p ../requirements/nginx/.ssl
 mkdir -p ../requirements/bonus/ftp/.ssl
 
 # Generate SSL credentials for nginx
-if [ "$1" -ne 0 ]; then
+if [ "$USE_CERTBOT" = "y" ]; then
+    read -p 'Enter your domain name: ' DOMAIN_NAME
     sudo apt-get install -y certbot
     sudo certbot certonly
     # Move nginx SSL credentials to the appropriate locations
-    cp /etc/letsencrypt/live/$1/fullchain.pem ../requirements/nginx/.ssl/server-cert.pem
-    cp /etc/letsencrypt/live/$1/privkey.pem ../requirements/nginx/.ssl/server-key.pem
+    cp /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem ../requirements/nginx/.ssl/server-cert.pem
+    cp /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem ../requirements/nginx/.ssl/server-key.pem
 else
     sh ssl_generate.sh server
     # Move nginx SSL credentials to the appropriate locations

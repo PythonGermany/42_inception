@@ -25,17 +25,17 @@ update:
 # Setup
 setup: env_create ssl_create domains_add
 docker_install:
-	sudo sh srcs/tools/docker_install.sh $(ARG)
+	@sudo sh srcs/tools/docker_install.sh $(ARG)
 env_create:
-	(cd srcs/tools && sh env_create.sh $(USER))
+	@(cd srcs/tools && sh env_create.sh)
 ssl_create:
-	(cd srcs/tools && sh ssl_create.sh $(ARG))
+	@(cd srcs/tools && sh ssl_create.sh)
 domains_add:
 	@sudo sh srcs/tools/domain_add.sh rburgsta.42.fr
 	@sudo sh srcs/tools/domain_add.sh rburgsta.example
 volume_create:
-	sudo mkdir -p /home/$(USER)/data/wordpress
-	sudo mkdir -p /home/$(USER)/data/mariadb
+	mkdir -p /home/$(USER)/data/wordpress
+	mkdir -p /home/$(USER)/data/mariadb
 
 # Delete
 env_delete:
@@ -46,8 +46,8 @@ domains_remove:
 	sudo sed -i '/rburgsta.42.fr/d' /etc/hosts
 	sudo sed -i '/rburgsta.example/d' /etc/hosts
 volume_delete:
-	sudo rm -rf /home/$(USER)/data/wordpress
-	sudo rm -rf /home/$(USER)/data/mariadb
+	rm -rf /home/$(USER)/data/wordpress
+	rm -rf /home/$(USER)/data/mariadb
 
 # Utils
 files_to_unix:
@@ -63,9 +63,9 @@ help:
 	@echo "  update         - Rebuild container"
 	@echo "$(RED)--------------------- Setup ---------------------"
 	@echo "$(YELLOW)  setup          - Run 'make env_create ssl_create domains_add'"
-	@echo "$(WHITE)  docker_install - Install docker using ARG=\"...\" as OS"
-	@echo "$(GREEN)  env_create     - Create .env file using random passwords using ENV var USER=\"...\ as name"
-	@echo "$(BLUE)  ssl_create     - Create SSL certificates using ARG=\"...\" as domain"
+	@echo "$(WHITE)  docker_install - Install docker"
+	@echo "$(GREEN)  env_create     - Create .env file using random passwords"
+	@echo "$(BLUE)  ssl_create     - Create SSL certificates"
 	@echo "$(MAGENTA)  domains_add    - Add domains to /etc/hosts"
 	@echo "$(CYAN)  volume_create  - Create volume directories"
 	@echo "$(RED)--------------------- Delete ---------------------"
