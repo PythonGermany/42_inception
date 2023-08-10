@@ -1,4 +1,8 @@
-read -p 'Do you want to create a certificate using certbot? (y/n): ' USE_CERTBOT
+if find ../ -type d -name ".ssl" -print -quit | grep -q .; then
+    echo "ssl_create.sh: SSL directories and files already exist."
+    exit 1
+fi
+read -p 'ssl_create.sh: Do you want to use certbot? (y/n): ' USE_CERTBOT
 
 openssl genpkey -algorithm RSA -out ca-key.pem
 openssl req -new -x509 -key ca-key.pem -out cacert.pem -subj $(cat ../conf/ssl_information.txt | tr -d "\n")

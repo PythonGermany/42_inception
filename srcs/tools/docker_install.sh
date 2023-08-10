@@ -1,4 +1,4 @@
-read -p 'Whats it your OS? (debian/ubuntu/raspbian): ' OS
+read -p 'docker_install.sh: Whats it your OS? (debian/ubuntu/raspbian): ' OS
 
 # Update the apt package index and install packages to allow apt to use a repository over HTTPS
 apt-get update

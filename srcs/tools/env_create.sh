@@ -1,4 +1,8 @@
-read -p 'Enter your domain name: ' DOMAIN_NAME
+if [ -f ../.env ]; then
+    echo "env_create.sh: .env file already exists."
+    exit 1
+fi
+read -p 'env_create.sh: Enter your domain name: ' DOMAIN_NAME
 
 # Copy template .env file
 cp ../conf/.env-sample ../.env

@@ -37,14 +37,13 @@ volume_create:
 
 # Delete
 env_delete:
-	rm -f srcs/.env
+	@(cd srcs/tools && sh env_delete.sh)
 ssl_delete:
-	(cd srcs/tools && sh ssl_delete.sh)
+	@(cd srcs/tools && sh ssl_delete.sh)
 domains_remove:
 	@sudo sh srcs/tools/domains_remove.sh
 volume_delete:
-	rm -rf /home/$(USER)/data/wordpress
-	rm -rf /home/$(USER)/data/mariadb
+	@(cd srcs/tools && sh volume_delete.sh)
 
 # Utils
 files_to_unix:
