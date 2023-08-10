@@ -1,5 +1,4 @@
 ARG =
-USER ?=
 
 # Colors
 BLACK = \033[0;30m
@@ -54,15 +53,15 @@ files_to_unix:
 	sudo apt-get install dos2unix
 	find . -type f -exec dos2unix {} +
 help:
-	@echo "$(RED)Usage: $(YELLOW)make [target] [ARG=\"...\"] [USER=\"...\"] "
+	@echo "$(RED)Usage: $(YELLOW)make [target] [ARG=\"...\"]"
 	@echo "Targets:$(RESET)"
-	@echo "  all (default)  - Start containers"
+	@echo "  all (default)  - Run 'make up'"
 	@echo "$(RED)--------------------- Docker ---------------------$(RESET)"
-	@echo "  up             - Start containers run 'make create volumes'"
+	@echo "  up             - Start containers and run '$(CYAN)make volume_delete$(RESET)'"
 	@echo "  down           - Stop containers"
 	@echo "  update         - Rebuild container"
 	@echo "$(RED)--------------------- Setup ---------------------"
-	@echo "$(YELLOW)  setup          - Run 'make env_create ssl_create domains_add'"
+	@echo "$(YELLOW)  setup          - Run 'make $(GREEN)env_create $(BLUE)ssl_create $(MAGENTA)domains_add$(YELLOW)'"
 	@echo "$(WHITE)  docker_install - Install docker"
 	@echo "$(GREEN)  env_create     - Create .env file using random passwords"
 	@echo "$(BLUE)  ssl_create     - Create SSL certificates"
@@ -78,8 +77,7 @@ help:
 	@echo "  help           - Display this help message"
 	@echo "$(RED)--------------------- Clean ---------------------$(RESET)"
 	@echo "  clean          - Stop containers and delete unused images"
-	@echo "  fclean         - Run 'make clean env_delete ssl_delete domains_remove volume_delete'"
-	@echo "                   and delete unused volumes and networks"
+	@echo "  fclean         - Run 'make clean $(GREEN)env_delete $(BLUE)ssl_delete $(MAGENTA)domains_remove $(CYAN)volume_delete$(RESET)'"
 	@echo "  re             - Run 'make fclean setup up'"
 
 # Clean and rebuild
