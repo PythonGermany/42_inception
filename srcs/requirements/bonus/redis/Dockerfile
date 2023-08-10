@@ -13,4 +13,4 @@ COPY tools/. .
 
 RUN apt-get update && apt-get upgrade -y && sh redis.sh
 
-CMD [ "/usr/bin/supervisord"]
+CMD [ "redis-server", "/etc/redis/redis.conf"]
