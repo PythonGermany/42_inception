@@ -23,7 +23,6 @@ update:
 	sudo docker compose -f srcs/docker-compose.yml build --no-cache --force-rm $(ARG)
 
 # Setup
-master_setup: docker_install setup
 setup: env_create ssl_create domains_add
 docker_install:
 	sudo sh srcs/tools/docker_install.sh $(ARG)
@@ -63,11 +62,10 @@ help:
 	@echo "  down           - Stop containers"
 	@echo "  update         - Rebuild container"
 	@echo "$(RED)--------------------- Setup ---------------------"
-	@echo "$(YELLOW)  master_setup	  - Run 'make install_docker setup'"
 	@echo "$(YELLOW)  setup          - Run 'make env_create ssl_create domains_add'"
 	@echo "$(WHITE)  docker_install - Install docker using ARG=\"...\" as OS"
 	@echo "$(GREEN)  env_create     - Create .env file using random passwords using ENV var USER=\"...\ as name"
-	@echo "$(BLUE)  ssl_create     - Create SSL certificates"
+	@echo "$(BLUE)  ssl_create     - Create SSL certificates using ARG=\"...\" as domain"
 	@echo "$(MAGENTA)  domains_add    - Add domains to /etc/hosts"
 	@echo "$(CYAN)  volume_create  - Create volume directories"
 	@echo "$(RED)--------------------- Delete ---------------------"
