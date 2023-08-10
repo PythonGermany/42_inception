@@ -4,11 +4,6 @@ apt-get install -y mariadb-server && \
 # Move config files to their respective locations
 mv 50-server.cnf /etc/mysql/mariadb.conf.d/ && \
 
-# Move SSL files to their respective locations
-mv cacert.pem /etc/mysql/ && \
-mv server-cert.pem /etc/mysql/ && \
-mv server-key.pem /etc/mysql/ && \
-
 # Set permissions for mariadb config file
 chmod 644 /etc/mysql/mariadb.conf.d/50-server.cnf && \
 

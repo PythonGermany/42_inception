@@ -30,7 +30,7 @@ docker_install:
 env_create:
 	(cd srcs/tools && sh env_create.sh $(USER))
 ssl_create:
-	(cd srcs/tools && sh ssl_create.sh)
+	(cd srcs/tools && sh ssl_create.sh $(ARG))
 domains_add:
 	@sudo sh srcs/tools/domain_add.sh rburgsta.42.fr
 	@sudo sh srcs/tools/domain_add.sh rburgsta.example

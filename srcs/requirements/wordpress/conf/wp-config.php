@@ -87,11 +87,6 @@ define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
-define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
-define('MYSQL_SSL_CA', '/etc/mysql/cacert.pem');
-define('MYSQL_SSL_CERT', '/etc/mysql/server-cert.pem');
-define('MYSQL_SSL_KEY', '/etc/mysql/server-key.pem');
-
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

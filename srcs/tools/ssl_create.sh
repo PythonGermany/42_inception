@@ -3,28 +3,22 @@ openssl req -new -x509 -key ca-key.pem -out cacert.pem -subj $(cat ../conf/ssl_i
 
 # Create required directories
 mkdir -p ../requirements/nginx/.ssl
-mkdir -p ../requirements/mariadb/.ssl
-mkdir -p ../requirements/wordpress/.ssl
 mkdir -p ../requirements/bonus/ftp/.ssl
 
 # Generate SSL credentials for nginx
-sh ssl_generate.sh server
-
-# Move nginx SSL credentials to the appropriate locations
-cp cacert.pem ../requirements/nginx/.ssl/
-mv server-cert.pem ../requirements/nginx/.ssl/
-mv server-key.pem ../requirements/nginx/.ssl/
-
-# Generate SSL credentials for database
-sh ssl_generate.sh server
-
-# Move database SSL credentials to the appropriate locations
-cp cacert.pem ../requirements/wordpress/.ssl/
-cp server-cert.pem ../requirements/wordpress/.ssl/
-cp server-key.pem ../requirements/wordpress/.ssl/
-cp cacert.pem ../requirements/mariadb/.ssl/
-mv server-cert.pem ../requirements/mariadb/.ssl/
-mv server-key.pem ../requirements/mariadb/.ssl/
+if [ "$1" -eq "certbot" ]; then
+    sudo apt-get install -y certbot
+    sudo certbot certonly
+    # Move nginx SSL credentials to the appropriate locations
+    cp /etc/letsencrypt/live/localhost/fullchain.pem ../requirements/nginx/.ssl/server-cert.pem
+    cp /etc/letsencrypt/live/localhost/privkey.pem ../requirements/nginx/.ssl/server-key.pem
+else
+    sh ssl_generate.sh server
+    # Move nginx SSL credentials to the appropriate locations
+    cp cacert.pem ../requirements/nginx/.ssl/
+    mv server-cert.pem ../requirements/nginx/.ssl/
+    mv server-key.pem ../requirements/nginx/.ssl/
+fi
 
 # Generate SSL credentials for ftp server
 sh ssl_generate.sh server

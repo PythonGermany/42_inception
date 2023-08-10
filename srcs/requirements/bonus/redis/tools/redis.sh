@@ -7,5 +7,5 @@ sed -i "s/{REDIS_HOST}/$REDIS_HOST/g" redis.conf && \
 sed -i "s/{REDIS_PORT}/$REDIS_PORT/g" redis.conf && \
 
 # Move config files to their respective locations
-mv redis.conf /etc/redis/
+mv redis.conf /etc/redis/ && \
 mv supervisord.conf /etc/supervisor/conf.d/
