@@ -66,16 +66,17 @@ help:
 	@echo "$(CYAN)  volume_create  - Create volume directories"
 	@echo "$(RED)--------------------- Delete ---------------------"
 	@echo "$(GREEN)  env_delete     - Delete .env file"
-	@echo "$(BLUE)  ssl_delete     - Delete SSL certificates$(RESET)"
+	@echo "$(BLUE)  ssl_delete     - Delete SSL certificates"
 	@echo "$(MAGENTA)  domains_remove - Remove domains from /etc/hosts"
 	@echo "$(CYAN)  volume_delete  - Delete volume directories"
 	@echo "$(RED)--------------------- Utils ---------------------$(RESET)"
 	@echo "  files_to_unix  - Convert files to unix format"
 	@echo "  help           - Display this help message"
 	@echo "$(RED)--------------------- Clean ---------------------$(RESET)"
-	@echo "  clean          - Stop containers and delete unused images"
-	@echo "  fclean         - Run 'make clean $(GREEN)env_delete $(BLUE)ssl_delete $(MAGENTA)domains_remove $(CYAN)volume_delete$(RESET)'"
-	@echo "  re             - Run 'make fclean setup up'"
+	@echo "  clean          - run 'make down' and delete unused images"
+	@echo "$(RED)  fclean         - Run 'make $(WHITE)clean $(GREEN)env_delete $(BLUE)ssl_delete $(MAGENTA)domains_remove"
+	@echo "                        $(CYAN)volume_delete$(RESET)' and delete unused images"
+	@echo "$(RED)  re             - Run 'make fclean setup up'$(RESET)"
 
 # Clean and rebuild
 clean: down

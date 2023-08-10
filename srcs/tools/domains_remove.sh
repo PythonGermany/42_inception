@@ -1,8 +1,9 @@
-REMOVE_DOMAIN=y
-while [ "$REMOVE_DOMAIN" = "y" ]
+DOMAIN=none
+while [ -n "$DOMAIN" ]
 do
-  read -p "domains_remove.sh: Enter domain name: " DOMAIN
-  # Remove domain from /etc/hosts file
-  sudo sed -i "/$DOMAIN/d" /etc/hosts
-  read -p "domains_remove.sh: Remove another domain? (y/n): " REMOVE_DOMAIN
+  read -p "domains_remove.sh: Enter domain to remove (leave empty to continue): " DOMAIN
+  if [ -n "$DOMAIN" ]; then
+    # Remove domain from /etc/hosts file
+    sudo sed -i "/$DOMAIN/d" /etc/hosts
+  fi
 done

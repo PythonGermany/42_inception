@@ -1,5 +1,5 @@
 if find ../ -type d -name ".ssl" -print -quit | grep -q .; then
-    echo "ssl_create.sh: SSL directories and files already exist."
+    echo "ssl_create.sh: SSL directories already exist."
     exit 1
 fi
 read -p 'ssl_create.sh: Do you want to use certbot? (y/n): ' USE_CERTBOT
