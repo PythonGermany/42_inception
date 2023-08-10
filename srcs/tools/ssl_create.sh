@@ -11,7 +11,7 @@ mkdir -p ../requirements/bonus/ftp/.ssl
 if [ "$USE_CERTBOT" = "y" ]; then
     read -p 'Enter your domain name: ' DOMAIN_NAME
     sudo apt-get install -y certbot
-    sudo certbot certonly
+    sudo certbot certonly --standalone -d $DOMAIN_NAME 
     # Move nginx SSL credentials to the appropriate locations
     cp /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem ../requirements/nginx/.ssl/server-cert.pem
     cp /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem ../requirements/nginx/.ssl/server-key.pem
