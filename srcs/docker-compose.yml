@@ -102,14 +102,14 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/${LOGIN}/data/wordpress
+      device: ${WORDPRESS_VOLUME_PATH}
       o: bind
 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /home/${LOGIN}/data/mariadb
+      device: ${MYSQL_VOLUME_PATH}
       o: bind
 
 networks:
