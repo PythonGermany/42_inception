@@ -30,8 +30,7 @@ env_create:
 ssl_create:
 	@(cd srcs/tools && sh ssl_create.sh)
 domains_add:
-	@sudo sh srcs/tools/domain_add.sh rburgsta.42.fr
-	@sudo sh srcs/tools/domain_add.sh rburgsta.example
+	@sudo sh srcs/tools/domains_add.sh
 volume_create:
 	mkdir -p /home/$(USER)/data/wordpress
 	mkdir -p /home/$(USER)/data/mariadb
@@ -42,8 +41,7 @@ env_delete:
 ssl_delete:
 	(cd srcs/tools && sh ssl_delete.sh)
 domains_remove:
-	sudo sed -i '/rburgsta.42.fr/d' /etc/hosts
-	sudo sed -i '/rburgsta.example/d' /etc/hosts
+	@sudo sh srcs/tools/domains_remove.sh
 volume_delete:
 	rm -rf /home/$(USER)/data/wordpress
 	rm -rf /home/$(USER)/data/mariadb
