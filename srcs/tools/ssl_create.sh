@@ -17,8 +17,8 @@ if [ "$USE_CERTBOT" = "y" ]; then
     sudo apt-get install -y certbot
     sudo certbot certonly --standalone -d $DOMAIN_NAME 
     # Move nginx SSL credentials to the appropriate locations
-    cp /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem ../requirements/nginx/.ssl/server-cert.pem
-    cp /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem ../requirements/nginx/.ssl/server-key.pem
+    sudo cp /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem ../requirements/nginx/.ssl/server-cert.pem
+    sudo cp /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem ../requirements/nginx/.ssl/server-key.pem
 else
     sh ssl_generate.sh server
     # Move nginx SSL credentials to the appropriate locations
