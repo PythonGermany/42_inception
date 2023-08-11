@@ -49,6 +49,8 @@ services:
       - wordpress:/var/www/${DOMAIN_NAME}
     networks:
       - docker-network
+    depends_on:
+      - mariadb
 
   mariadb:
     container_name: ${MYSQL_HOST}
